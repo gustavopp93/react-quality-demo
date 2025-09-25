@@ -66,6 +66,52 @@ export function UserList() {
     setSortBy(e.target.value)
   }
 
+  // Code smell: Duplicate date formatting functions
+  const formatUserBirthDate = (birthDate: string) => {
+    return new Date(birthDate).toLocaleDateString()
+  }
+
+  const formatBirthDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString()
+  }
+
+  const getUserBirthDateFormatted = (birthDate: string) => {
+    if (!birthDate) return 'N/A'
+    return new Date(birthDate).toLocaleDateString()
+  }
+
+  // Code smell: Duplicate status formatting
+  const formatUserStatus = (isActive: boolean) => {
+    return isActive ? 'Active' : 'Inactive'
+  }
+
+  const getUserStatusText = (active: boolean) => {
+    if (active) return 'Active'
+    return 'Inactive'
+  }
+
+  const getStatusDisplay = (userActive: boolean) => {
+    return userActive === true ? 'Active' : 'Inactive'
+  }
+
+  // Code smell: Duplicate email validation
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const validateEmailAddress = (emailAddress: string) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return pattern.test(emailAddress)
+  }
+
+  const checkEmailFormat = (email: string) => {
+    if (!email) return false
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+  }
+
   // Code smell: Complex render function with nested conditions
   const renderUserRow = (user: User, index: number) => {
     return (

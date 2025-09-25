@@ -138,3 +138,70 @@ export function getAPIEndpoint(resource) {
   const baseUrl = 'https://api.example.com/v1/'
   return baseUrl + resource
 }
+
+// Code smell: More duplicate functions
+export function formatPersonName(person) {
+  if (person.firstName && person.lastName) {
+    return person.firstName + ' ' + person.lastName
+  }
+  return 'Unknown Person'
+}
+
+export function getFullName(individual) {
+  if (individual.firstName && individual.lastName) {
+    return individual.firstName + ' ' + individual.lastName
+  }
+  return 'Unknown Individual'
+}
+
+// Code smell: Duplicate date utilities
+export function formatDate(date) {
+  return new Date(date).toLocaleDateString()
+}
+
+export function getFormattedDate(dateString) {
+  const date = new Date(dateString)
+  return date.toLocaleDateString()
+}
+
+export function displayDate(dateInput) {
+  if (!dateInput) return 'N/A'
+  return new Date(dateInput).toLocaleDateString()
+}
+
+// Code smell: More duplicate math operations
+export function add(a, b) {
+  return a + b
+}
+
+export function sum(x, y) {
+  return x + y
+}
+
+export function plus(num1, num2) {
+  return num1 + num2
+}
+
+export function multiply(a, b) {
+  return a * b
+}
+
+export function times(x, y) {
+  return x * y
+}
+
+// Code smell: Duplicate string utilities
+export function capitalize(str) {
+  if (!str) return ''
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function capitalizeFirst(text) {
+  if (!text) return ''
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+export function makeFirstLetterUppercase(string) {
+  if (!string) return ''
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

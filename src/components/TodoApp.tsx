@@ -51,6 +51,35 @@ export function TodoApp() {
     console.log('Added todo:', newTodo)
   }
 
+  // Code smell: Duplicate validation logic
+  const addQuickTodo = (text: string) => {
+    if (text.trim() === '') return
+
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: text.trim(),
+      completed: false,
+      createdAt: new Date(),
+      priority: 'medium'
+    }
+
+    setTodos([...todos, newTodo])
+    console.log('Added quick todo:', newTodo)
+  }
+
+  // Code smell: Another duplicate validation function
+  const validateTodoInput = (input: string) => {
+    if (input.trim() === '') return false
+    if (input.length > 100) return false
+    return true
+  }
+
+  const validateQuickInput = (input: string) => {
+    if (input.trim() === '') return false
+    if (input.length > 100) return false
+    return true
+  }
+
   // Code smell: Mutation of state
   const toggleTodo = (id: number) => {
     const updatedTodos = todos.map(todo => {
@@ -113,6 +142,21 @@ export function TodoApp() {
     return priority === 'high' ? '#ff6b6b' :
            priority === 'medium' ? '#4ecdc4' :
            '#95e1d3'
+  }
+
+  // Code smell: Duplicate priority color logic
+  const getTodoPriorityColor = (priority: string) => {
+    if (priority === 'high') return '#ff6b6b'
+    if (priority === 'medium') return '#4ecdc4'
+    return '#95e1d3'
+  }
+
+  const getPriorityBackgroundColor = (priority: string) => {
+    switch (priority) {
+      case 'high': return '#ff6b6b'
+      case 'medium': return '#4ecdc4'
+      default: return '#95e1d3'
+    }
   }
 
   const getStatsText = () => {

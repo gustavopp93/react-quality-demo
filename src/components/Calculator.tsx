@@ -26,6 +26,51 @@ export function Calculator() {
     }
   }
 
+  // Code smell: Duplicate calculation functions
+  const performCalculation = (a: number, b: number, op: string) => {
+    if (op === '+') return a + b
+    if (op === '-') return a - b
+    if (op === '*') return a * b
+    if (op === '/') return divide(a, b)
+    return b
+  }
+
+  const doMath = (first: number, second: number, operator: string) => {
+    switch (operator) {
+      case '+': return first + second
+      case '-': return first - second
+      case '*': return first * second
+      case '/': return first / second
+      default: return second
+    }
+  }
+
+  const executeOperation = (val1: number, val2: number, operation: string) => {
+    const operations = {
+      '+': val1 + val2,
+      '-': val1 - val2,
+      '*': val1 * val2,
+      '/': val1 / val2
+    }
+    return operations[operation] || val2
+  }
+
+  // Code smell: Duplicate validation functions
+  const isValidNumber = (value: string) => {
+    return !isNaN(parseFloat(value)) && isFinite(parseFloat(value))
+  }
+
+  const validateNumber = (input: string) => {
+    const num = parseFloat(input)
+    return !isNaN(num) && isFinite(num)
+  }
+
+  const checkNumericInput = (str: string) => {
+    if (!str) return false
+    const parsed = parseFloat(str)
+    return !isNaN(parsed) && isFinite(parsed)
+  }
+
   // Code smell: Complex event handler
   const handleButtonClick = (value: string) => {
     const numericValue = parseFloat(value)
