@@ -50,7 +50,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
-    "moduleNameMapping": {
+    "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
     "collectCoverageFrom": [
@@ -62,7 +62,32 @@
     "coverageReporters": ["text", "lcov", "html"],
     "coverageDirectory": "coverage",
     "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": ["@swc/jest"]
+      "^.+\\.(js|jsx)$": ["@swc/jest", {
+        "jsc": {
+          "parser": {
+            "syntax": "ecmascript",
+            "jsx": true
+          },
+          "transform": {
+            "react": {
+              "runtime": "automatic"
+            }
+          }
+        }
+      }],
+      "^.+\\.(ts|tsx)$": ["@swc/jest", {
+        "jsc": {
+          "parser": {
+            "syntax": "typescript",
+            "tsx": true
+          },
+          "transform": {
+            "react": {
+              "runtime": "automatic"
+            }
+          }
+        }
+      }]
     }
   }
 }
