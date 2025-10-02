@@ -1,4 +1,4 @@
-me: Pull request scanner
+name: Pull request scanner
 
 on:
     pull_request:
